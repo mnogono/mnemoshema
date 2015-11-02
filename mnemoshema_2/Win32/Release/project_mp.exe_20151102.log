@@ -1,0 +1,2 @@
+[ERROR  ]	2015/11/02 16:07:54 thread: [6108] db_module.cpp[TDataModuleMP::CheckDBConnection]:58	Can't connect to db
+[ERROR  ]	2015/11/02 16:07:54 thread: [6108] db_module.cpp[TDataModuleMP::CheckDBConnection]:59	[Microsoft][ODBC Driver Manager] Data source name not found and no default driver specified
