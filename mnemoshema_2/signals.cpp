@@ -51,6 +51,7 @@ void __fastcall TFormSignals::CreateRecordViews() {
 
 		if (record->record_type == RECORD_TYPE_SENSOR) {
 			const TSensor *sensor = static_cast<const TSensor *>(record);
+
 			if (mshViews.find(sensor) == mshViews.end()){
 				mshViews[sensor] = new std::list<IMnemoshemaView *>();
 			}

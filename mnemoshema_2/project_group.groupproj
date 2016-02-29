@@ -9,6 +9,15 @@
         <Projects Include="tests\project_mp_tests.cbproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\sysObjectsTest\sysObjectsTest.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\mnemoshema_1\MimicPanel\mpd\project_mpd.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\setup\app_to_sql\app_to_sql.cbproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +44,41 @@
     <Target Name="project_mp_tests:Make">
         <MSBuild Projects="tests\project_mp_tests.cbproj" Targets="Make"/>
     </Target>
+    <Target Name="sysObjectsTest">
+        <MSBuild Projects="..\..\sysObjectsTest\sysObjectsTest.cbproj"/>
+    </Target>
+    <Target Name="sysObjectsTest:Clean">
+        <MSBuild Projects="..\..\sysObjectsTest\sysObjectsTest.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="sysObjectsTest:Make">
+        <MSBuild Projects="..\..\sysObjectsTest\sysObjectsTest.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="project_mpd">
+        <MSBuild Projects="..\mnemoshema_1\MimicPanel\mpd\project_mpd.cbproj"/>
+    </Target>
+    <Target Name="project_mpd:Clean">
+        <MSBuild Projects="..\mnemoshema_1\MimicPanel\mpd\project_mpd.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="project_mpd:Make">
+        <MSBuild Projects="..\mnemoshema_1\MimicPanel\mpd\project_mpd.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="app_to_sql">
+        <MSBuild Projects="..\setup\app_to_sql\app_to_sql.cbproj"/>
+    </Target>
+    <Target Name="app_to_sql:Clean">
+        <MSBuild Projects="..\setup\app_to_sql\app_to_sql.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="app_to_sql:Make">
+        <MSBuild Projects="..\setup\app_to_sql\app_to_sql.cbproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="project_mp;project_mp_tests"/>
+        <CallTarget Targets="project_mp;project_mp_tests;sysObjectsTest;project_mpd;app_to_sql"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="project_mp:Clean;project_mp_tests:Clean"/>
+        <CallTarget Targets="project_mp:Clean;project_mp_tests:Clean;sysObjectsTest:Clean;project_mpd:Clean;app_to_sql:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="project_mp:Make;project_mp_tests:Make"/>
+        <CallTarget Targets="project_mp:Make;project_mp_tests:Make;sysObjectsTest:Make;project_mpd:Make;app_to_sql:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

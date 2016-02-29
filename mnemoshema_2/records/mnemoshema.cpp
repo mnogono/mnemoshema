@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-TMnemoshema::TMnemoshema() {
+TMnemoshema::TMnemoshema() : TRecord() {
 	record_type = TRecordType::RECORD_TYPE_MNEMOSHEMA;
 }
 

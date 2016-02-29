@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-TSensorBit::TSensorBit() {
+TSensorBit::TSensorBit() : TRecord() {
 	record_type = TRecordType::RECORD_TYPE_SENSOR_BIT;
 }
 

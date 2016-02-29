@@ -29,6 +29,8 @@ struct TRecord {
 
 	String uuid;
 
+	TRecord();
+
 	virtual ~TRecord();
 
 	virtual String GetName() const = 0;

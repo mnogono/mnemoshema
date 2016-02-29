@@ -33,6 +33,9 @@ void __fastcall TDataModuleMP::DataModuleCreate(TObject *Sender)
 
 	sysLogger::Init(ExtractFileName(Application->ExeName).c_str(), sysLogger::LOG_LEVEL_TRACE);
 
+	//clean up old log files (older then 14 days)
+	sysFile::DeleteFilesOlderThen(L".\\", L"*.log", true, sysTime::DAY2MSEC * 14);
+
 	setlocale(LC_ALL, ".1251");
 	setlocale(LC_NUMERIC, "en_US");
 	FormatSettings.DecimalSeparator = L'.';

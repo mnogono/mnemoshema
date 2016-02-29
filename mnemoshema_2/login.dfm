@@ -1,11 +1,15 @@
 object FormLogin: TFormLogin
   Left = 0
   Top = 0
+  Margins.Left = 5
+  Margins.Top = 5
+  Margins.Right = 5
+  Margins.Bottom = 5
   AutoSize = True
   BorderIcons = [biSystemMenu]
   Caption = #1052#1085#1077#1084#1086#1089#1093#1077#1084#1072
-  ClientHeight = 89
-  ClientWidth = 264
+  ClientHeight = 94
+  ClientWidth = 274
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,19 +24,29 @@ object FormLogin: TFormLogin
   PixelsPerInch = 96
   TextHeight = 13
   object ButtonOk: TButton
-    Left = 0
+    AlignWithMargins = True
+    Left = 5
     Top = 64
     Width = 129
     Height = 25
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Caption = #1040#1074#1090#1086#1088#1080#1079#1072#1094#1080#1103
     TabOrder = 0
     OnClick = ButtonOkClick
   end
   object ButtonCancel: TButton
-    Left = 135
+    AlignWithMargins = True
+    Left = 140
     Top = 64
     Width = 129
     Height = 25
+    Margins.Left = 5
+    Margins.Top = 5
+    Margins.Right = 5
+    Margins.Bottom = 5
     Caption = #1054#1090#1084#1077#1085#1072
     TabOrder = 1
     OnClick = ButtonCancelClick
@@ -40,68 +54,93 @@ object FormLogin: TFormLogin
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 264
+    Width = 274
     Height = 28
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 2
+    ExplicitLeft = 2
+    ExplicitWidth = 267
     object Label1: TLabel
       AlignWithMargins = True
-      Left = 3
-      Top = 3
+      Left = 5
+      Top = 5
       Width = 76
-      Height = 22
+      Height = 18
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Align = alLeft
       AutoSize = False
       Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100':'
       ExplicitLeft = 0
+      ExplicitTop = 3
       ExplicitHeight = 13
     end
     object EditLogin: TEdit
       AlignWithMargins = True
-      Left = 85
-      Top = 3
-      Width = 176
-      Height = 22
+      Left = 91
+      Top = 5
+      Width = 178
+      Height = 18
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Align = alClient
       TabOrder = 0
       OnKeyPress = FormKeyPress
-      ExplicitLeft = 82
-      ExplicitTop = 0
-      ExplicitWidth = 182
+      ExplicitLeft = 85
+      ExplicitTop = 3
+      ExplicitWidth = 176
       ExplicitHeight = 21
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 28
-    Width = 264
+    Width = 274
     Height = 28
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 3
+    ExplicitLeft = 2
+    ExplicitWidth = 267
     object Label2: TLabel
       AlignWithMargins = True
-      Left = 3
-      Top = 3
+      Left = 5
+      Top = 5
       Width = 76
-      Height = 22
+      Height = 18
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Align = alLeft
       AutoSize = False
       Caption = #1055#1072#1088#1086#1083#1100':'
+      ExplicitLeft = 3
+      ExplicitTop = 3
+      ExplicitHeight = 22
     end
     object EditPassword: TEdit
       AlignWithMargins = True
-      Left = 85
-      Top = 3
-      Width = 176
-      Height = 22
+      Left = 91
+      Top = 5
+      Width = 178
+      Height = 18
+      Margins.Left = 5
+      Margins.Top = 5
+      Margins.Right = 5
+      Margins.Bottom = 5
       Align = alClient
       PasswordChar = '*'
       TabOrder = 0
       OnKeyPress = FormKeyPress
-      ExplicitTop = 9
-      ExplicitWidth = 182
+      ExplicitLeft = 85
+      ExplicitTop = 3
+      ExplicitWidth = 176
       ExplicitHeight = 21
     end
   end

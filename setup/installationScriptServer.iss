@@ -14,23 +14,21 @@ AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 DefaultDirName={pf}\MySQL\{#MyAppName}
 DefaultGroupName=Mnemoshema Server
-OutputDir=G:\doc\programming project\builderXE\MimicPanel\InnoCompile
+OutputDir=.\out
 OutputBaseFilename=setupMnemoshemaServer
 Compression=lzma
-SolidCompression=yes
+SolidCompression=no
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "..\sysUtils.dll"; DestDir: "{tmp}"; Flags: dontcopy;
-;Source: "{src}\MySQL Server 5.0\*"; DestDir: "{app}"; Flags: recursesubdirs onlyifdoesntexist external;
-Source: "..\MySQL Server 5.0\*"; DestDir: "{app}"; Flags: recursesubdirs;
-Source: "..\sql\*"; DestDir: "{app}\mnemoshema";
-Source: "..\cmd\*"; DestDir: "{app}\mnemoshema";
-Source: "..\doc\Руководство пользователя. Мнемосхема.files\*"; DestDir: "{app}\doc\Руководство пользователя. Мнемосхема.files";
-Source: "..\doc\Руководство пользователя. Мнемосхема.htm"; DestDir: "{app}\doc";
-;Source: "..\archiver\Release\Win32\ProjectArchiver.exe"; DestDir: "{app}\mnemoshema";
+Source: "sysUtils.dll"; DestDir: "{tmp}"; Flags: dontcopy;
+Source: "MySQL Server 5.0\*"; DestDir: "{app}"; Flags: recursesubdirs;
+Source: "sql\*"; DestDir: "{app}\mnemoshema";
+Source: "cmd\*"; DestDir: "{app}\mnemoshema";
+Source: "doc\Руководство пользователя. Мнемосхема.files\*"; DestDir: "{app}\doc\Руководство пользователя. Мнемосхема.files";
+Source: "doc\Руководство пользователя. Мнемосхема.htm"; DestDir: "{app}\doc";
 
 [Icons]
 Name: "{group}\Удалить"; Filename: "{app}\unins000.exe"

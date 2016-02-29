@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-TDevice::TDevice() {
+TDevice::TDevice() : TRecord() {
 	record_type = TRecordType::RECORD_TYPE_DEVICE;
 }
 

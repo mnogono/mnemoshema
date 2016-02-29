@@ -376,11 +376,15 @@ void BuildTreeViewDevice(TTreeView *TreeViewDevice) {
 			continue;
 		}
 
-		if (deviceTreeGroup->record_type == TRecordType::RECORD_TYPE_SENSOR) {
-			TSensor *sensor = GetSensor(deviceTreeGroup->uuid);
+		if (deviceTreeGroup->child_record_type == TRecordType::RECORD_TYPE_SENSOR) {
+			TSensor *sensor = GetSensor(deviceTreeGroup->child_uuid);
+			if (!sensor) {
+				continue;
+			}
+
 			name = sensor->name;
-			record = static_cast<TRecord *>(sensor);
-		} else if (deviceTreeGroup->record_type == TRecordType::RECORD_TYPE_DEVICE_TREE_GROUP) {
+			record = sensor;
+		} else if (deviceTreeGroup->child_record_type == TRecordType::RECORD_TYPE_DEVICE_TREE_GROUP) {
 			name = deviceTreeGroup->name;
 			record = deviceTreeGroup;
 		}

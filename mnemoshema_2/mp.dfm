@@ -252,6 +252,10 @@ object FormMnemoshemaMain: TFormMnemoshemaMain
       Caption = #1054#1090#1082#1088#1099#1090#1100' '#1087#1072#1087#1082#1091' '#1089' '#1089#1086#1073#1099#1090#1080#1077#1084
       OnClick = PMOpenEventFolderClick
     end
+    object PMOpenEventFile: TMenuItem
+      Caption = #1054#1090#1082#1088#1099#1090#1100' '#1092#1072#1081#1083' '#1089#1086#1073#1099#1090#1080#1077
+      OnClick = PMOpenEventFileClick
+    end
     object PMCreateEventReport: TMenuItem
       Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1089#1086#1073#1099#1090#1080#1103#1084' '#1079#1072' '#1076#1077#1085#1100
       OnClick = PMCreateEventReportClick

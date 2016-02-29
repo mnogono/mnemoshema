@@ -4,8 +4,10 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-TSensor::TSensor() {
+TSensor::TSensor() : TRecord() {
 	record_type = TRecordType::RECORD_TYPE_SENSOR;
+	device_id = 0;
+    deviceTreeGroupId = 0;
 }
 
 String TSensor::GetName() const {

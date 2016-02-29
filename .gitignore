@@ -1,3 +1,11 @@
 /.svn
 *__history*
 *Win32*
+/out
+/mysql_odbc_driver
+/sql/update_device_refresher.sql
+/sql/update_project_mp.sql
+/sql/update_project_mpd.sql
+/setup
+/mpd_2
+/mnemoshema_1

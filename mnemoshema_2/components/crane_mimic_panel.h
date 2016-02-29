@@ -6,6 +6,7 @@
 #include "Crane.h"
 #include "request_mnemoshema_data.h"
 #include "request_http_data.h"
+#include "request_mnemoshema_data_history.h"
 //---------------------------------------------------------------------------
 
 //TODO implement IMnemoshemaView
@@ -73,6 +74,10 @@ class TCraneMimicPanel : public sysObserver::IObserver {
 		void initializeSensors();
 
 		void initializeCranes();
+
+		bool UpdateDataHTTP(TTaskRequestHTTPData *data = NULL);
+
+		bool UpdateDataHistory(TTaskRequestMnemoshemaDataHistory *data = NULL);
 };
 
 #endif

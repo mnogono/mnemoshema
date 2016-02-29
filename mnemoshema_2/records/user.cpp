@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-TUser::TUser() {
+TUser::TUser() : TRecord() {
 	record_type = TRecordType::RECORD_TYPE_USER;
 }
 

@@ -30,10 +30,12 @@
 AppId={{9DDC7D49-512D-4333-BCFF-64D1116D8747}
 AppName={#MnemoshemaAppName_RU}
 AppVersion={#MyAppVersion}
+AppPublisher=My Company, Inc.
+AppPublisherURL=http://www.example.com/
 ;AppVerName={#MyAppName} {#MyAppVersion}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
-OutputDir=G:\doc\programming project\builderXE\MimicPanel\InnoCompile
+OutputDir=.\out
 OutputBaseFilename=setupMnemoshema
 Compression=lzma
 SolidCompression=yes
@@ -43,18 +45,18 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 Source: "mysql-connector-odbc-5.2.2-win32.msi"; DestDir: "{tmp}";
-Source: "..\app_update\Release\Win32\ProjectAppUpdate.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\mnemoshema_2\Win32\Release\project_mp.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\mnemoshema_1\MimicPanel\app_update\Release\Win32\ProjectAppUpdate.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\mnemoshema_2\Win32\Release\project_mp.exe"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "..\mp_offline\Win32\Release\MPOfflineProject.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\mpd\Release\Win32\project_mpd.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\mpd\Release\Win32\mysqlimport.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\borlndmm.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\mnemoshema_1\MimicPanel\mpd\Release\Win32\project_mpd.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\mnemoshema_1\MimicPanel\mpd\Release\Win32\mysqlimport.exe"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "..\borlndmm.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\mysql_odbc_driver\myodbc-installer.exe"; DestDir: "{app}\odbc"; Flags: ignoreversion
 Source: "..\mysql_odbc_driver\myodbc-installer-system.cmd"; DestDir: "{app}\odbc"; Flags: ignoreversion
 Source: "..\mysql_odbc_driver\myodbc-installer-user.cmd"; DestDir: "{app}\odbc"; Flags: ignoreversion
 Source: "..\mysql_odbc_driver\remove_driver.cmd"; DestDir: "{app}\odbc"; Flags: ignoreversion
 Source: "..\mysql_odbc_driver\remove_dsn.cmd"; DestDir: "{app}\odbc"; Flags: ignoreversion
-Source: "..\img\*"; DestDir: "{app}\img"; Flags: ignoreversion
+Source: "..\mnemoshema_1\MimicPanel\img\*"; DestDir: "{app}\img"; Flags: ignoreversion
 Source: "..\..\skyReports\OOmacro\Extension\*"; DestDir: "{app}\Extension"; Flags: ignoreversion
 
 [Tasks]

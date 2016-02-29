@@ -262,23 +262,14 @@ void TCraneMimicPanel::rotate(void *sensorId, double angleDegree) {
 	crane->rotateAsDegree(angleDegree);
 }
 
-void TCraneMimicPanel::UpdateData(sysObserverable::IObserverable *task) {
-	if (task->GetObserverableType() != TObserverableTypes::DEVICE_HTTP_DATA) {
-		return;
-	}
-
-	if (crane1x == NULL || crane1y == NULL || crane1d == NULL || crane2x == NULL || crane2y == NULL) {
-		return;
-	}
-
-	TTaskRequestHTTPData *httpTask = static_cast<TTaskRequestHTTPData *>(task);
+bool TCraneMimicPanel::UpdateDataHTTP(TTaskRequestHTTPData *httpTask) {
+	sysLogger::TRACE_A("CraneMimicPanel UpdateDataHTTP");
 
 	std::map<const TSensor *, TSensorData *> &data = httpTask->data;
 
+	bool redrawMimicPanel = false;
 	const TSensor *sensor;
 	TSensorData *sensorData;
-
-	bool redrawMimicPanel = false;
 
 	for (std::map<const TSensor *, TSensorData *>::iterator i = data.begin(), iEnd = data.end(); i != iEnd; ++i) {
 		sensor = i->first;
@@ -313,6 +304,120 @@ void TCraneMimicPanel::UpdateData(sysObserverable::IObserverable *task) {
 			crane2->moveYMeters(yMeters);
 			redrawMimicPanel = true;
 		}
+	}
+
+    return redrawMimicPanel;
+}
+
+bool TCraneMimicPanel::UpdateDataHistory(TTaskRequestMnemoshemaDataHistory *historyTask) {
+	sysLogger::TRACE_A("CraneMimicPanel UpdateDataHistory");
+
+	std::map<const TSensor *, std::list<TSensorData *> *> &data = historyTask->data;
+
+	bool redrawMimicPanel = false;
+	const TSensor *sensor;
+	TSensorData *sensorData;
+
+	for (std::map<const TSensor *, std::list<TSensorData *> *>::iterator i = data.begin(), iEnd = data.end(); i != iEnd; ++i) {
+		sensor = i->first;
+
+		std::list<TSensorData *> *sensorDatas = i->second;
+		if (sensorData == NULL) {
+			continue;
+		}
+
+		TSensorData *sensorData = sensorDatas->back();
+
+		if (sensor == crane1x) {
+			double xMeters = SensorDataToDouble(crane1x, sensorData);
+
+			sysLogger::TRACE_A("update crane1x by xMeters:");
+			sysLogger::TRACE_W(FloatToStr(xMeters).c_str());
+
+			crane1->moveXMeters(xMeters);
+			redrawMimicPanel = true;
+
+		} else if (sensor == crane1y) {
+			double yMeters = SensorDataToDouble(crane1y, sensorData);
+
+			sysLogger::TRACE_A("update crane1y by yMeters:");
+			sysLogger::TRACE_W(FloatToStr(yMeters).c_str());
+
+			crane1->moveYMeters(yMeters);
+			redrawMimicPanel = true;
+
+		} else if (sensor == crane1d) {
+			double rotatePosition = SensorDataToDouble(crane1d, sensorData);
+
+			sysLogger::TRACE_A("update crane1d by rotatePosition:");
+			sysLogger::TRACE_W(FloatToStr(rotatePosition).c_str());
+
+			crane1->rotateAsMeters(rotatePosition);
+			redrawMimicPanel = true;
+
+		} else if (sensor == crane2x) {
+			double xMeters = SensorDataToDouble(crane2x, sensorData);
+
+			sysLogger::TRACE_A("update crane2x by xMeters:");
+			sysLogger::TRACE_W(FloatToStr(xMeters).c_str());
+
+			crane2->moveXMeters(xMeters);
+			redrawMimicPanel = true;
+
+		} else if (sensor == crane2x) {
+			double yMeters = SensorDataToDouble(crane2x, sensorData);
+
+			sysLogger::TRACE_A("update crane2x by yMeters:");
+			sysLogger::TRACE_W(FloatToStr(yMeters).c_str());
+
+			crane2->moveYMeters(yMeters);
+			redrawMimicPanel = true;
+		}
+	}
+
+	return redrawMimicPanel;
+}
+
+void TCraneMimicPanel::UpdateData(sysObserverable::IObserverable *task) {
+	if (!task) {
+		sysLogger::ERR_A("can't update crate data because task is NULL");
+		return;
+	}
+
+	if (!crane1x) {
+		sysLogger::ERR_A("can't update crate data because crane1x is NULL");
+		return;
+	}
+
+	if (!crane1y) {
+		sysLogger::ERR_A("can't update crate data because crane1y is NULL");
+		return;
+	}
+
+	if (!crane1d) {
+		sysLogger::ERR_A("can't update crate data because crane1d is NULL");
+		return;
+	}
+
+	if (!crane2x) {
+		sysLogger::ERR_A("can't update crate data because crane2x is NULL");
+		return;
+	}
+
+	if (!crane2y) {
+		sysLogger::ERR_A("can't update crate data because crane2y is NULL");
+		return;
+	}
+
+	bool redrawMimicPanel = false;
+
+	if (task->GetObserverableType() == TObserverableTypes::DEVICE_HTTP_DATA) {
+		TTaskRequestHTTPData *httpTask = static_cast<TTaskRequestHTTPData *>(task);
+		redrawMimicPanel = UpdateDataHTTP(httpTask);
+
+	} else if (task->GetObserverableType() == TObserverableTypes::MNEMOSHEMA_DATA_HISTORY) {
+		TTaskRequestMnemoshemaDataHistory *historyTask = static_cast<TTaskRequestMnemoshemaDataHistory *>(task);
+		redrawMimicPanel = UpdateDataHistory(historyTask);
 	}
 
 	if (redrawMimicPanel) {

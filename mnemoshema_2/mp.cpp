@@ -919,27 +919,27 @@ void __fastcall TFormMnemoshemaMain::CheckBoxEventByDateClick(TObject *Sender) {
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TFormMnemoshemaMain::PMOpenEventFolderClick(TObject *Sender) {
+String __fastcall TFormMnemoshemaMain::GetPopupEventFile() {
 	static double fLocalTimeBiasInDays = sysTime::GetLocalTimeBias() * sysTime::SEC2DAY;
 
 	int row = stringGridEvents->Row - 1;
 	TDatasource<TDatasourceObjectEvent> *datasource = stringGridEvents->datasource;
 	if (row < 0) {
-		return;
+		return "";
 	}
 
 	if (row >= datasource->Size()) {
-		return;
+		return "";
 	}
 
 	TDatasourceObjectEvent oEvent = (*stringGridEvents->datasource)[row];
 
 	if (oEvent.jsonExternalData.IsEmpty()) {
-		return;
+		return "";
 	}
 
 	if (oEvent.device == NULL) {
-		return;
+		return "";
 	}
 
 	String eventFile = "";
@@ -965,11 +965,19 @@ void __fastcall TFormMnemoshemaMain::PMOpenEventFolderClick(TObject *Sender) {
 			}
 		}
 
-		if (eventFile.IsEmpty() == false) {
-			sysFile::ShowFileInExplorer(eventFile.c_str());
-		}
+		return eventFile;
 	} catch (Exception &e) {
 		sysLogger::ERR_W(e.Message.c_str());
+	}
+
+	return "";
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TFormMnemoshemaMain::PMOpenEventFolderClick(TObject *Sender) {
+	String eventFile = GetPopupEventFile();
+	if (eventFile.IsEmpty() == false) {
+		sysFile::ShowFileInExplorer(eventFile.c_str());
 	}
 }
 
@@ -1185,5 +1193,24 @@ void __fastcall TFormMnemoshemaMain::FindSensorClick(TObject *Sender) {
 	TreeViewDevice->Select(TreeViewDevice->Items->Item[nodeIndex]);
 	TreeViewDevice->SetFocus();
 }
+
 //---------------------------------------------------------------------------
+void __fastcall TFormMnemoshemaMain::PMOpenEventFileClick(TObject *Sender) {
+	String eventFile = GetPopupEventFile();
+	if (eventFile.IsEmpty() == false) {
+		wchar_t commandLine[1024];
+		snwprintf(commandLine, 1024, L"cmd /C \"%s\"", eventFile.c_str());
+
+		if(sysProcess::ExecuteCmd(NULL, commandLine) == false) {
+			if (sysLogger::CheckLogLevel(sysLogger::LOG_LEVEL_ERROR)) {
+				sysLogger::ERR_A("can't open event file:");
+				sysLogger::ERR_W(eventFile.c_str());
+				sysLogger::ERR_A("GetLastError:");
+				sysLogger::ERR_W(IntToStr((int)GetLastError()).c_str());
+			}
+		}
+	}
+}
+//---------------------------------------------------------------------------
+
 

@@ -22,6 +22,10 @@ __fastcall TFormDashboard::TFormDashboard(TComponent* Owner)
 void __fastcall TFormDashboard::CreateTimeRangeDataObserver(TMnemoshemaDataManager &mnemoshemaDataManager) {
 	timeRangeDataObserver = new TTimeRangeDataObserver(mshViews);
 	mnemoshemaDataManager.AddObserver(timeRangeDataObserver);
+
+	if (craneMimicPanel != NULL) {
+        mnemoshemaDataManager.AddObserver(craneMimicPanel);
+	}
 }
 
 //---------------------------------------------------------------------------
@@ -38,6 +42,10 @@ void __fastcall TFormDashboard::CreateHTTPDataObserver(TMnemoshemaDataManager &m
 void __fastcall TFormDashboard::CreateMnemoshemaDataHistoryObserver(TMnemoshemaDataManager &mnemoshemaDataManager) {
 	mnemoshemaDataHistoryObserver = new TMnemoshemaDataHistoryObserver(mshViews);
 	mnemoshemaDataManager.AddObserver(mnemoshemaDataHistoryObserver);
+
+	if (craneMimicPanel != NULL) {
+        mnemoshemaDataManager.AddObserver(craneMimicPanel);
+	}
 }
 
 //---------------------------------------------------------------------------
@@ -179,6 +187,7 @@ void __fastcall TFormDashboard::LoadDashboardElements() {
 // ---------------------------------------------------------------------------
 void __fastcall TFormDashboard::InitializeCraneMimicPanel(TScrollBox *ScrollBoxImage, String &mimePanelBkgImgName) {
 	if (sysApp::GetSettingInt(L"EnableCrane", 1) == 0) {
+		sysLogger::ERR_A("EnableCrate == 0, InitializeCraneMimicPanel failed!");
 		return;
 	}
 
@@ -259,7 +268,7 @@ void __fastcall TFormDashboard::SetMnemoshemaDataManager(TMnemoshemaDataManager 
 
 	CreateTimeRangeDataObserver(mnemoshemaDataManager);
 
-	//CreateDeviceFileDataObserver(mnemoshemaDataManager);
+	CreateMnemoshemaDataHistoryObserver(mnemoshemaDataManager);
 }
 
 //---------------------------------------------------------------------------

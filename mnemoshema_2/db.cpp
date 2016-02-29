@@ -285,7 +285,7 @@ std::list<TSensor *> & LoadSensors(const TUser &user) {
 			"LEFT JOIN device_sensor_parameters as dsp_precision ON dsp_precision.sensor_id = ds.id AND dsp_precision.name = 'precision' "
 			"LEFT JOIN device_sensor_parameters as dsp_unit_mode ON dsp_unit_mode.sensor_id = ds.id AND dsp_unit_mode.name = 'unit_mode' "
 			"LEFT JOIN device_sensor_parameters as dsp_index ON dsp_index.sensor_id = ds.id AND dsp_index.name = 'index' "
-			"LEFT JOIN device_tree_group ON device_tree_group.uuid = ds.uuid ";
+			"LEFT JOIN device_tree_group ON device_tree_group.child_uuid = ds.uuid ";
 
 		//for new device data file format, need to load all sensors into the memmory of client application
 		//bacause need to known the size of all sensor data size while read new data file format
@@ -438,7 +438,7 @@ std::list<TDeviceTreeGroup *> & LoadDeviceTreeGroups(const TUser &User) {
 	}
 	DEVICE_TREE_GROUPS.clear();
 
-	DataModuleMP->ADOQuery->SQL->Text = "SELECT `id`, `name`, `uuid`, `parent_uuid`, `record_type` FROM device_tree_group";
+	DataModuleMP->ADOQuery->SQL->Text = "SELECT `id`, `name`, `uuid`, `parent_uuid`, `child_uuid`, `record_type`, `child_record_type` FROM device_tree_group";
 	try {
 		DataModuleMP->ADOQuery->Open();
 		for (int itRecord = 0, len = DataModuleMP->ADOQuery->RecordCount; itRecord < len; ++itRecord) {
@@ -447,7 +447,9 @@ std::list<TDeviceTreeGroup *> & LoadDeviceTreeGroups(const TUser &User) {
 			deviceTreeGroup->name = DataModuleMP->ADOQuery->Fields->FieldByName("name")->AsString;
 			deviceTreeGroup->uuid = DataModuleMP->ADOQuery->Fields->FieldByName("uuid")->AsAnsiString;
 			deviceTreeGroup->parent_uuid = DataModuleMP->ADOQuery->Fields->FieldByName("parent_uuid")->AsString;
-			deviceTreeGroup->record_type = DataModuleMP->ADOQuery->Fields->FieldByName("record_type")->AsInteger;
+//			deviceTreeGroup->record_type = DataModuleMP->ADOQuery->Fields->FieldByName("record_type")->AsInteger;
+            deviceTreeGroup->child_record_type = DataModuleMP->ADOQuery->Fields->FieldByName("child_record_type")->AsInteger;
+			deviceTreeGroup->child_uuid = DataModuleMP->ADOQuery->Fields->FieldByName("child_uuid")->AsString;
 
 			DEVICE_TREE_GROUPS.push_back(deviceTreeGroup);
 
@@ -504,5 +506,6 @@ std::list<TMnemoshema *> & LoadMnemoshems(const TUser &user){
 
 	return MNEMOSHEMS;
 }
+
 
 

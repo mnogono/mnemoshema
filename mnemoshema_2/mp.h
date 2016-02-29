@@ -88,6 +88,7 @@ __published:	// IDE-managed Components
 	TMemo *MemoEventDescription;
 	TSplitter *Splitter3;
 	TMenuItem *FindSensor;
+	TMenuItem *PMOpenEventFile;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall TimerUpdateHTTPDataTimer(TObject *Sender);
 	void __fastcall FormDestroy(TObject *Sender);
@@ -112,6 +113,7 @@ __published:	// IDE-managed Components
 	void __fastcall PMOpenEventFolderClick(TObject *Sender);
 	void __fastcall PMCreateEventReportClick(TObject *Sender);
 	void __fastcall FindSensorClick(TObject *Sender);
+	void __fastcall PMOpenEventFileClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	//http data manager, notify all observer for new sensor data
@@ -168,6 +170,8 @@ public:
 	void __fastcall InitChartFilters();
 
 	void __fastcall StringGridEventClick(TObject *Sender);
+
+	String __fastcall GetPopupEventFile();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TFormMnemoshemaMain *FormMnemoshemaMain;

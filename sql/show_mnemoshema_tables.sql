@@ -1,2 +1,0 @@
-use mnemoshema;
-show tables;

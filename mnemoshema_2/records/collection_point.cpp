@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-TCollectionPoint::TCollectionPoint() {
+TCollectionPoint::TCollectionPoint() : TRecord() {
 	record_type = TRecordType::RECORD_TYPE_COLLECTION_POINT;
 }
 

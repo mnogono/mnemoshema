@@ -127,7 +127,7 @@ void __fastcall TFormReports::UpdateReportsGrid() {
 //---------------------------------------------------------------------------
 void __fastcall TFormReports::DeleteSelectedReports() {
 	if(DBGridReports->SelectedRows->Count == 0) {
-		MessageBox(NULL, L"Не выделены ни одна строка для удаления", L"Информация", MB_OK);
+		MessageBox(NULL, L"Укажите строки для удаления", L"Информация", MB_OK);
 		return;
 	}
 

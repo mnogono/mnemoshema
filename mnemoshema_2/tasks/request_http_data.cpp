@@ -43,15 +43,21 @@ void TTaskRequestHTTPData::Run() {
 		Parse(httpResponse);
 	} catch (Exception &e) {
 		sysLogger::ERR_W(e.ToString().c_str());
-		http->Disconnect();
+		//http->Disconnect();
 
+		sysLogger::ERR_A("Trying to destroy and recreate http object");
+		delete http;
+       	http = new TIdHTTP();
+
+		/*
 		try {
-            sysLogger::ERR_A("trying to reconnecting");
+			sysLogger::ERR_A("trying to reconnecting");
 			//trying to reconnect to server
 			http->Connect(DataModuleMP->host, DataModuleMP->port);
 		} catch (Exception &e) {
 			sysLogger::ERR_W(e.ToString().c_str());
 		}
+		*/
 	}
 }
 
